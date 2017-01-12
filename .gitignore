@@ -1,4 +1,5 @@
-# Visual Studio 2015 user specific files
+*.VC.db
+BattleTank.VC.VC.opendb
 .vs/
 
 # Compiled Object files
@@ -37,7 +38,6 @@
 *.suo
 *.opensdf
 *.sdf
-*.VC.opendb
 
 # Precompiled Assets
 SourceArt/**/*.png
@@ -60,3 +60,4 @@ Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
+BattleTank/Content/StarterContent/
