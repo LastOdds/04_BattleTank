@@ -19,6 +19,21 @@ void UTankMovementComponent::IntendMoveForward(float Throw)
 	//TODO Prevent double speed
 }
 
+void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed)
+{
+	//No need to call super as we are replacing the functionality
+	
+	auto TankFoward = GetOwner()->GetActorForwardVector();
+	auto AIFowardIntention = MoveVelocity.GetSafeNormal();
+	auto FowardThrow = FVector::DotProduct(TankFoward, AIFowardIntention);
+
+	IntendMoveForward(FowardThrow);
+	
+
+	//UE_LOG(LogTemp, Warning, TEXT("%s vectoring to  %s"), *TankName, *MoveVelocityString);
+}
+
+
 void UTankMovementComponent::IntendturnRight(float Throw)
 {
 	
