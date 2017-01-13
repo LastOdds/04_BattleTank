@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+//Copyright Lovely Day Games 2017
 
 #include "BattleTank.h"
 #include "TankTrack.h"
@@ -9,14 +9,6 @@ void UTankMovementComponent::Initialise(UTankTrack* LeftTrackToSet, UTankTrack* 
 {
 	LeftTrack = LeftTrackToSet;
 	RightTrack = RightTrackToSet;
-}
-
-void UTankMovementComponent::IntendMoveForward(float Throw)
-{
-	if (!LeftTrack || !RightTrack) { return; }
-	LeftTrack->SetThrottle(Throw);
-	RightTrack->SetThrottle(Throw);
-	//TODO Prevent double speed
 }
 
 void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed)
@@ -33,15 +25,19 @@ void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool
 	auto TankName = GetOwner()->GetName();
 	IntendRotate(RotateThrow);
 
-	//UE_LOG(LogTemp, Warning, TEXT("%s vectoring to  %s"), *TankName, *MoveVelocityString);
+	//UE_LOG(LogTemp, Warning, TEXT("Rotate: %f, Forward: %f"), RotateThrow, FowardThrow);
 }
 
-
-void UTankMovementComponent::IntendRotate(float Throw)
+void UTankMovementComponent::IntendMoveForward(float Throw)
 {
-	
 	if (!LeftTrack || !RightTrack) { return; }
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(Throw);
-	//TODO Prevent double speed
+}
+
+void UTankMovementComponent::IntendRotate(float Throw)
+{
+	if (!LeftTrack || !RightTrack) { return; }
+	LeftTrack->SetThrottle(Throw);
+	RightTrack->SetThrottle(-Throw);
 }
