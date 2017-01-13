@@ -25,20 +25,23 @@ void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool
 	
 	auto TankFoward = GetOwner()->GetActorForwardVector();
 	auto AIFowardIntention = MoveVelocity.GetSafeNormal();
-	auto FowardThrow = FVector::DotProduct(TankFoward, AIFowardIntention);
 
+	auto FowardThrow = FVector::DotProduct(TankFoward, AIFowardIntention);
 	IntendMoveForward(FowardThrow);
 	
+	auto RotateThrow = FVector::CrossProduct(AIFowardIntention, TankFoward).Z;
+	auto TankName = GetOwner()->GetName();
+	IntendRotate(RotateThrow);
 
 	//UE_LOG(LogTemp, Warning, TEXT("%s vectoring to  %s"), *TankName, *MoveVelocityString);
 }
 
 
-void UTankMovementComponent::IntendturnRight(float Throw)
+void UTankMovementComponent::IntendRotate(float Throw)
 {
 	
 	if (!LeftTrack || !RightTrack) { return; }
 	LeftTrack->SetThrottle(Throw);
-	RightTrack->SetThrottle(-Throw);
+	RightTrack->SetThrottle(Throw);
 	//TODO Prevent double speed
 }
