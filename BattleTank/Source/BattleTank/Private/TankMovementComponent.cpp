@@ -24,20 +24,18 @@ void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool
 	auto RotateThrow = FVector::CrossProduct(AIFowardIntention, TankFoward).Z;
 	auto TankName = GetOwner()->GetName();
 	IntendRotate(RotateThrow);
-
-	//UE_LOG(LogTemp, Warning, TEXT("Rotate: %f, Forward: %f"), RotateThrow, FowardThrow);
 }
 
 void UTankMovementComponent::IntendMoveForward(float Throw)
 {
-	if (!LeftTrack || !RightTrack) { return; }
+	if (!ensure(LeftTrack && RightTrack)) { return; }
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(Throw);
 }
 
 void UTankMovementComponent::IntendRotate(float Throw)
 {
-	if (!LeftTrack || !RightTrack) { return; }
+	if (!ensure(LeftTrack && RightTrack)) { return; }
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(-Throw);
 }

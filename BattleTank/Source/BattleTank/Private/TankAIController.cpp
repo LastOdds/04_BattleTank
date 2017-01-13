@@ -1,9 +1,10 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+//Copyright Lovely Day Games 2017
 
 #include "BattleTank.h"
 #include "Tank.h"
 #include "TankAIController.h"
 
+//Depends on movement component via pathfinding system
 
 void ATankAIController::BeginPlay()
 {
@@ -18,7 +19,7 @@ void ATankAIController::Tick(float DeltaTime)
 	auto PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
 	auto ControlledTank = Cast<ATank>(GetPawn());
 
-	if (PlayerTank)
+	if (ensure(PlayerTank))
 	{
 		// Move towards the player
 		MoveToActor(PlayerTank, AccptenceRadius); // TODO Check radius is in cm
