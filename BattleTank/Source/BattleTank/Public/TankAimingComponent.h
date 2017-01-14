@@ -12,7 +12,6 @@ enum class EFiringState : uint8
 	Reloading,
 	Aiming,
 	Locked,
-	Default
 };
 
 // Forward Declaration
@@ -30,6 +29,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Setput")
 	void Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
 
+	UFUNCTION(BlueprintCallable, Category = "Firing")
 	void AimAt(FVector HitLocation);
 
 	UFUNCTION(BlueprintCallable, Category = "Firing")
@@ -49,9 +49,11 @@ private:
 
 	void MoveBarrelTowards(FVector AimDirection);
 
+	bool IsBarrelMoving();
+
 	UTankBarrel* Barrel = nullptr;
 	UTankTurret* Turret = nullptr;
-	
+
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 
@@ -62,4 +64,6 @@ private:
 	float ReloadTimeInSeconds = 3;
 
 	double LastFireTime = 0;
+
+	FVector AimDirection;
 };
