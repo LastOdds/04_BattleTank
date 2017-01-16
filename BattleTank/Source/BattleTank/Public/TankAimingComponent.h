@@ -12,6 +12,7 @@ enum class EFiringState : uint8
 	Reloading,
 	Aiming,
 	Locked,
+	AmmoDry
 };
 
 // Forward Declaration
@@ -34,6 +35,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Firing")
 	void Fire();
+
+	UFUNCTION(BlueprintCallable, Category = "Firing")
+	int GetCurrentAmmo() const;
 
 	EFiringState GetFiringState() const;
 
@@ -68,4 +72,9 @@ private:
 	double LastFireTime = 0;
 
 	FVector AimDirection;
+
+	int CurrentAmmo = 0;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	int	MaxAmmo = 20;
 };
