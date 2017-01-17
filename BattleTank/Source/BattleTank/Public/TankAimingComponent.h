@@ -37,7 +37,7 @@ public:
 	void Fire();
 
 	UFUNCTION(BlueprintCallable, Category = "Firing")
-	int GetCurrentAmmo() const;
+	int32 GetCurrentAmmo() const;
 
 	EFiringState GetFiringState() const;
 
@@ -73,8 +73,8 @@ private:
 
 	FVector AimDirection;
 
-	int CurrentAmmo = 0;
+	int32 CurrentAmmo = 0;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
-	int	MaxAmmo = 20;
+	int32	MaxAmmo = 20;
 };
